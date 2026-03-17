@@ -1,7 +1,7 @@
 [[ test ]]
 game_system = "WoW"
 input = "3WW12<=7"
-output = "(3WW12<=7) ＞ [1,12,2] ＞ 成功数1（大成功1個、大失敗1個）"
+output = "(3WW12<=7) ＞ [1,12,2] ＞ 成功度1（大成功1個、大失敗1個）"
 success = true
 rands = [
   { sides = 12, value = 1 },
@@ -12,7 +12,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "3WW12<=7"
-output = "(3WW12<=7) ＞ [4,12,2] ＞ 成功数2（大成功0個、大失敗1個） ＞ ファンブル！"
+output = "(3WW12<=7) ＞ [4,12,2] ＞ 成功度2（大成功0個、大失敗1個） ＞ ファンブル！"
 failure = true
 fumble = true
 rands = [
@@ -24,7 +24,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "3WW12<=7"
-output = "(3WW12<=7) ＞ [1,1,2] ＞ 成功数5（大成功2個、大失敗0個）"
+output = "(3WW12<=7) ＞ [1,1,2] ＞ 成功度5（大成功2個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -36,7 +36,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "3WW12#2<=7"
-output = "(3WW12#2<=7) ＞ [1,1,2] ＞ 成功数2（大成功2個、大失敗1個）"
+output = "(3WW12#2<=7) ＞ [1,1,2] ＞ 成功度2（大成功2個、大失敗1個）"
 success = true
 critical = true
 rands = [
@@ -48,7 +48,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "5WW12@2#11<=6"
-output = "(5WW12@2#11<=6) ＞ [1,12,2,5,6] ＞ 成功数4（大成功2個、大失敗1個）"
+output = "(5WW12@2#11<=6) ＞ [1,12,2,5,6] ＞ 成功度4（大成功2個、大失敗1個）"
 critical = true
 success = true
 rands = [
@@ -62,7 +62,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "5WW12@0#13<=6"
-output = "(5WW12@0#13<=6) ＞ [1,12,2,5,6] ＞ 成功数4（大成功0個、大失敗0個）"
+output = "(5WW12@0#13<=6) ＞ [1,12,2,5,6] ＞ 成功度4（大成功0個、大失敗0個）"
 success = true
 rands = [
   { sides = 12, value = 1 },
@@ -75,7 +75,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "5WW12@0#10<=6"
-output = "(5WW12@0#10<=6) ＞ [1,12,2,5,6] ＞ 成功数4（大成功0個、大失敗1個） ＞ ファンブル！"
+output = "(5WW12@0#10<=6) ＞ [1,12,2,5,6] ＞ 成功度4（大成功0個、大失敗1個） ＞ ファンブル！"
 fumble = true
 failure = true
 rands = [
@@ -89,7 +89,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "(4+0)WW12<=8"
-output = "(4WW12<=8) ＞ [10,3,2,1] ＞ 成功数4（大成功1個、大失敗0個）"
+output = "(4WW12<=8) ＞ [10,3,2,1] ＞ 成功度4（大成功1個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -102,7 +102,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12<=6"
-output = "(4WW12<=6) ＞ [10,3,2,1] ＞ 成功数4（大成功1個、大失敗0個）"
+output = "(4WW12<=6) ＞ [10,3,2,1] ＞ 成功度4（大成功1個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -115,7 +115,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12@5<=6"
-output = "(4WW12@5<=6) ＞ [10,3,2,1] ＞ 成功数6（大成功3個、大失敗0個）"
+output = "(4WW12@5<=6) ＞ [10,3,2,1] ＞ 成功度6（大成功3個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -128,7 +128,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12@2#10<=6"
-output = "(4WW12@2#10<=6) ＞ [10,3,2,1] ＞ 成功数3（大成功2個、大失敗1個）"
+output = "(4WW12@2#10<=6) ＞ [10,3,2,1] ＞ 成功度3（大成功2個、大失敗1個）"
 success = true
 critical = true
 rands = [
@@ -141,7 +141,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12@2#10<=2"
-output = "(4WW12@2#10<=2) ＞ [10,3,2,1] ＞ 成功数2（大成功2個、大失敗1個）"
+output = "(4WW12@2#10<=2) ＞ [10,3,2,1] ＞ 成功度2（大成功2個、大失敗1個）"
 success = true
 critical = true
 rands = [
@@ -154,7 +154,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12@2#12<=11"
-output = "(4WW12@2#12<=11) ＞ [10,3,2,1] ＞ 成功数6（大成功2個、大失敗0個）"
+output = "(4WW12@2#12<=11) ＞ [10,3,2,1] ＞ 成功度6（大成功2個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -167,7 +167,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "(4-3)WW12"
-output = "(1WW12<=6) ＞ [10] ＞ 成功数0（大成功0個、大失敗0個）"
+output = "(1WW12<=6) ＞ [10] ＞ 成功度0（大成功0個、大失敗0個）"
 failure = true
 rands = [
   { sides = 12, value = 10 },
@@ -179,7 +179,7 @@ rands = [
 [[ test ]]
 game_system = "WoW"
 input = "4WW12@2#12<=11"
-output = "(4WW12@2#12<=11) ＞ [10,3,2,1] ＞ 成功数6（大成功2個、大失敗0個）"
+output = "(4WW12@2#12<=11) ＞ [10,3,2,1] ＞ 成功度6（大成功2個、大失敗0個）"
 success = true
 critical = true
 rands = [
@@ -187,6 +187,42 @@ rands = [
   { sides = 12, value = 3 },
   { sides = 12, value = 2 },
   { sides = 12, value = 1 },
+]
+
+[[ test ]]
+game_system = "WoW"
+input = "5WW12@2#11<=5+1"
+output = "(5WW12@2#11<=6) ＞ [1,12,2,5,6] ＞ 成功度4（大成功2個、大失敗1個）"
+critical = true
+success = true
+rands = [
+  { sides = 12, value = 1 },
+  { sides = 12, value = 12 },
+  { sides = 12, value = 2 },
+  { sides = 12, value = 5 },
+  { sides = 12, value = 6 },
+]
+
+[[ test ]]
+game_system = "WoW"
+input = "3WW12<=5+2"
+output = "(3WW12<=7) ＞ [1,12,2] ＞ 成功度1（大成功1個、大失敗1個）"
+success = true
+rands = [
+  { sides = 12, value = 1 },
+  { sides = 12, value = 12 },
+  { sides = 12, value = 2 },
+]
+
+[[ test ]]
+game_system = "WoW"
+input = "3WW12<=8-1"
+output = "(3WW12<=7) ＞ [1,12,2] ＞ 成功度1（大成功1個、大失敗1個）"
+success = true
+rands = [
+  { sides = 12, value = 1 },
+  { sides = 12, value = 12 },
+  { sides = 12, value = 2 },
 ]
 
 [[ test ]]
