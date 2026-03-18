@@ -112,19 +112,24 @@ module BCDice
       end
 
       def roll_wow(command)
-        # コマンドの解析
-        m = /^(\d+)WW12(?:@(\d+))?(?:#(\d+))?(?:<=(\d+))?$/.match(command)
-        return nil unless m
+        parser = Command::Parser.new("WW12", round_type: RoundType::FLOOR)
+                                .has_prefix_number
+                                .enable_critical
+                                .enable_fumble
+                                .disable_modifier
+                                .restrict_cmp_op_to(nil, :<=)
+        parsed = parser.parse(command)
+        return nil unless parsed
 
-        num_dice = m[1].to_i # 振るダイスの数
-        critical_success_value = m[2] ? m[2].to_i : 1 # 大成功の値（デフォルトは1）
-        critical_fail_value = m[3] ? m[3].to_i : 12 # 大失敗の値（デフォルトは12）
-        success_threshold = m[4] ? m[4].to_i : 6 # 成功の閾値（デフォルトは6）
+        num_dice = parsed.prefix_number
+        critical_success_value = parsed.critical || 1 # 大成功の値（デフォルトは1）
+        critical_fail_value = parsed.fumble || 12 # 大失敗の値（デフォルトは12）
+        success_threshold = parsed.target_number || 6 # 成功の閾値（デフォルトは6）
 
-        if m[4].nil?
-          command_with_defaults = "#{m[1]}WW12<=#{success_threshold}"
+        if parsed.cmp_op.nil?
+          command_with_defaults = "#{parsed.to_s}<=#{success_threshold}"
         else
-          command_with_defaults = command
+          command_with_defaults = parsed.to_s
         end
 
         # ダイスを振る
@@ -149,7 +154,7 @@ module BCDice
 
         # 結果をBCDICE::Resultで構造化
         BCDice::Result.new.tap do |r|
-          r.text = "(#{command_with_defaults}) ＞ [#{dice_results.join(',')}] ＞ 成功数#{successes}（大成功#{critical_success_first}個、大失敗#{critical_fail_first}個）#{is_fumble ? ' ＞ ファンブル！' : ''}"
+          r.text = "(#{command_with_defaults}) ＞ [#{dice_results.join(',')}] ＞ 成功度#{successes}（大成功#{critical_success_first}個、大失敗#{critical_fail_first}個）#{is_fumble ? ' ＞ ファンブル！' : ''}"
           r.critical = critical_success > 0
           r.fumble = is_fumble
           r.success = successes > 0 && !is_fumble  # 成功数が0より大きく、ファンブルがない場合に成功
