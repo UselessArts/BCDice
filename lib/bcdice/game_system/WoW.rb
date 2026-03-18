@@ -112,20 +112,24 @@ module BCDice
       end
 
       def roll_wow(command)
-        # コマンドの解析
-        m = /^(\d+)WW12(?:@(\d+))?(?:#(\d+))?(?:<=(\d+(?:[+\-]\d+)*))?$/.match(command)
-        return nil unless m
+        parser = Command::Parser.new("WW12", round_type: RoundType::FLOOR)
+                                .has_prefix_number
+                                .enable_critical
+                                .enable_fumble
+                                .disable_modifier
+                                .restrict_cmp_op_to(nil, :<=)
+        parsed = parser.parse(command)
+        return nil unless parsed
 
-        num_dice = m[1].to_i # 振るダイスの数
-        critical_success_value = m[2] ? m[2].to_i : 1 # 大成功の値（デフォルトは1）
-        critical_fail_value = m[3] ? m[3].to_i : 12 # 大失敗の値（デフォルトは12）
-        success_threshold = m[4] ? Arithmetic.eval(m[4], RoundType::FLOOR) : 6 # 成功の閾値（デフォルトは6）
-        return nil if m[4] && success_threshold.nil?
+        num_dice = parsed.prefix_number
+        critical_success_value = parsed.critical || 1 # 大成功の値（デフォルトは1）
+        critical_fail_value = parsed.fumble || 12 # 大失敗の値（デフォルトは12）
+        success_threshold = parsed.target_number || 6 # 成功の閾値（デフォルトは6）
 
-        if m[4].nil?
-          command_with_defaults = "#{m[1]}WW12<=#{success_threshold}"
+        if parsed.cmp_op.nil?
+          command_with_defaults = "#{parsed.to_s}<=#{success_threshold}"
         else
-          command_with_defaults = "#{m[1]}WW12#{m[2] ? "@#{m[2]}" : ''}#{m[3] ? "##{m[3]}" : ''}<=#{success_threshold}"
+          command_with_defaults = parsed.to_s
         end
 
         # ダイスを振る
